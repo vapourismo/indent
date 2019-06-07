@@ -2,7 +2,7 @@ cabal-version: >= 1.10
 name:          indent
 synopsis:      Fix your indentation.
 description:   Fix your indentation with this dead simple tool.
-version:       0.0.0
+version:       0.0.1
 license:       BSD3
 license-file:  LICENSE
 author:        Ole Krüger
