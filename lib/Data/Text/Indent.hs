@@ -1,8 +1,7 @@
 module Data.Text.Indent (Options (..), defaultOptions, fixIndentation) where
 
-import           Data.Char      (isSpace)
-import           Data.Semigroup ((<>))
-import qualified Data.Text      as Text
+import           Data.Char (isSpace)
+import qualified Data.Text as Text
 
 -- | Line details
 data Line = Line
@@ -58,7 +57,7 @@ fixIndentation (Options character multiplier) =
           | linePrefixLength line > prevPrefixLength
           , newLevel <- prevLevel + 1 ->
             ( Block (linePrefixLength line) newLevel : blocks
-            , mkPrefix newLevel <> lineBody line
+            , Text.append (mkPrefix newLevel) (lineBody line)
             )
 
           -- The current line has a shorted prefix than the previous block, meaning that the
@@ -67,13 +66,13 @@ fixIndentation (Options character multiplier) =
           , blocks' <- dropWhile (\block -> blockPrefixLength block > linePrefixLength line) blocks
           , block <- findBlock blocks' ->
             ( blocks'
-            , mkPrefix (blockLevel block) <> lineBody line
+            , Text.append (mkPrefix (blockLevel block)) (lineBody line)
             )
 
           -- This line prefix is exactly as long as the current block's.
           | otherwise ->
             ( blocks
-            , mkPrefix prevLevel <> lineBody line
+            , Text.append (mkPrefix prevLevel) (lineBody line)
             )
 
     run blocks lines =
