@@ -1,7 +1,8 @@
 module Data.Text.Indent (Options (..), defaultOptions, fixIndentation) where
 
-import           Data.Char (isSpace)
-import qualified Data.Text as Text
+import           Data.Char      (isSpace)
+import           Data.Semigroup ((<>))
+import qualified Data.Text      as Text
 
 -- | Line details
 data Line = Line
