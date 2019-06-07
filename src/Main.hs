@@ -5,6 +5,7 @@ import Control.Applicative ((<|>))
 import qualified Options.Applicative as Options
 
 import           Data.Foldable    (traverse_)
+import           Data.Semigroup   ((<>))
 import qualified Data.Text        as Text
 import           Data.Text.Indent (Options (..), defaultOptions, fixIndentation)
 import qualified Data.Text.IO     as Text
