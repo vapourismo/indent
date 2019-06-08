@@ -56,18 +56,14 @@ fixIndentation (Options character multiplier) =
           -- block has started.
           | linePrefixLength line > prevPrefixLength
           , newLevel <- prevLevel + 1 ->
-            ( Block (linePrefixLength line) newLevel : blocks
+            ( Block {blockPrefixLength = linePrefixLength line, blockLevel = newLevel} : blocks
             , Text.append (mkPrefix newLevel) (lineBody line)
             )
 
           -- The current line has a shorted prefix than the previous block, meaning that the
           -- indentation block is done.
-          | linePrefixLength line < prevPrefixLength
-          , blocks' <- dropWhile (\block -> blockPrefixLength block > linePrefixLength line) blocks
-          , block <- findBlock blocks' ->
-            ( blocks'
-            , Text.append (mkPrefix (blockLevel block)) (lineBody line)
-            )
+          | linePrefixLength line < prevPrefixLength ->
+            fix (dropWhile (\block -> linePrefixLength line < blockPrefixLength block) blocks) line
 
           -- This line prefix is exactly as long as the current block's.
           | otherwise ->
