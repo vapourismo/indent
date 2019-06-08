@@ -1,0 +1,3 @@
+--command="cabal new-repl --ghc-options=-fno-break-on-exception --ghc-options=-fno-break-on-error --ghc-options=-v1 --ghc-options=-ferror-spans --ghc-options=-j"
+--restart=indent.cabal
+--restart=.ghcid
