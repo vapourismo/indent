@@ -17,7 +17,7 @@ source-repository head
 
 library
   default-language: Haskell2010
-  build-depends:    base == 4.*, text
+  build-depends:    base == 4.*, text, containers
   hs-source-dirs:   lib
   exposed-modules:  Data.Text.Indent
 
