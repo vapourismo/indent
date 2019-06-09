@@ -33,4 +33,10 @@ executable indent
   build-depends:    base, indent, text, optparse-applicative
   hs-source-dirs:   src
   main-is:          Main.hs
+
   ghc-options:      -Wall
+
+  if impl(ghc >= 8)
+    ghc-options: -Wno-name-shadowing
+  else
+    ghc-options: -fno-warn-name-shadowing
