@@ -1,11 +1,13 @@
 #!/bin/sh
 
+indent=$(cabal new-exec which indent)
+
 function check {
     file=$1
     out=$(mktemp)
 
     echo "> Checking $file ..."
-    cabal new-exec indent < $file > $out
+    $indent < $file > $out
     diff $file $out
     status=$?
 
